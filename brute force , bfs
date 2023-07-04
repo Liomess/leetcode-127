@@ -1,0 +1,29 @@
+from collections import deque
+class Solution:
+	def ladderLength(self, start, target, word):
+		n=len(start)
+		s=set(word)
+		q=deque()
+		if start in s:
+		  s.remove(start)
+		q.append([start,1])
+		while q:
+		  node,level=q.popleft()
+		  if node==target:
+		    return level
+		  for i in range(n):
+		    org=node[i]
+		    for j in range(26):
+		      node=list(map(lambda x:x,node))
+		      ch=chr(97+j)
+		      node[i]=ch
+		      st=""
+		      node=st.join(node)
+		      if node in s:
+		        q.append([node,level+1])
+		        s.remove(node)
+		    node=list(map(lambda x:x,node))
+		    node[i]=org
+		    st=""
+		    node=st.join(node)
+		return 0
